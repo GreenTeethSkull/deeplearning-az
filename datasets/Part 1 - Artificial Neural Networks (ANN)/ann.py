@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Apr 28 10:38:56 2019
-
-@author: juangabriel
-"""
-
 # Redes Neuronales Artificales
 
 # Instalar Theano
@@ -78,11 +72,11 @@ classifier = Sequential()
 
 # Añadir las capas de entrada y primera capa oculta
 classifier.add(Dense(units = 6, kernel_initializer = "uniform",  activation = "relu", input_dim = 11))
-classifier.add(Dropout(p = 0.1))
+classifier.add(Dropout(0.1)) # esto es un dropout del 10% hasta el 50% máximo
 
 # Añadir la segunda capa oculta
 classifier.add(Dense(units = 6, kernel_initializer = "uniform",  activation = "relu"))
-classifier.add(Dropout(p = 0.1))
+classifier.add(Dropout(0.1))
 
 # Añadir la capa de salida
 classifier.add(Dense(units = 1, kernel_initializer = "uniform",  activation = "sigmoid"))
@@ -106,6 +100,8 @@ cm = confusion_matrix(y_test, y_pred)
 print((cm[0][0]+cm[1][1])/cm.sum())
 
 ## Parte 4 - Evaluar, mejorar y Ajustar la RNA
+
+## tener en cuenta que KerasClassifier está obsoleto y se requiere usar Sci-Keras
 
 ### Evaluar la **RNA**
 from keras.wrappers.scikit_learn import KerasClassifier
@@ -147,7 +143,7 @@ parameters = {
     'optimizer' : ['adam', 'rmsprop']
 }
 
-grid_search = GridSearchCV(estimator = classifier, 
+grid_search = GridSearchCV(estimator = classifier,  
                            param_grid = parameters, 
                            scoring = 'accuracy', 
                            cv = 10)
