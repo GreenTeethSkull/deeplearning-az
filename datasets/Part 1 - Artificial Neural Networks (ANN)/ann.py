@@ -104,8 +104,11 @@ print((cm[0][0]+cm[1][1])/cm.sum())
 ## tener en cuenta que KerasClassifier está obsoleto y se requiere usar Sci-Keras
 
 ### Evaluar la **RNA**
-from keras.wrappers.scikit_learn import KerasClassifier
+##from keras.wrappers.scikit_learn import KerasClassifier
 from sklearn.model_selection import cross_val_score
+
+### CAMBIO DE LIBERÍA
+from scikeras.wrappers import KerasClassifier
 
 def build_classifier():
   classifier = Sequential()
@@ -115,7 +118,9 @@ def build_classifier():
   classifier.compile(optimizer = "adam", loss = "binary_crossentropy", metrics = ["accuracy"])
   return classifier
 
-classifier = KerasClassifier(build_fn = build_classifier, batch_size = 10, nb_epoch = 100)
+# classifier = KerasClassifier(build_fn = build_classifier, batch_size = 10, nb_epoch = 100)
+# Nueva declaración de clasificador
+classifier = KerasClassifier(model = build_classifier, batch_size = 10, nb_epoch = 100)
 accuracies = cross_val_score(estimator=classifier, X = X_train, y = y_train, cv = 10, n_jobs=-1, verbose = 1)
 
 mean = accuracies.mean()
@@ -127,7 +132,7 @@ variance = accuracies.std()
 ### Ajustar la *RNA*
 from sklearn.model_selection import GridSearchCV # sklearn.grid_search
 
-def build_classifier(optimizer):
+def build_classifier(optimizer='adam'):
   classifier = Sequential()
   classifier.add(Dense(units = 6, kernel_initializer = "uniform",  activation = "relu", input_dim = 11))
   classifier.add(Dense(units = 6, kernel_initializer = "uniform",  activation = "relu"))
@@ -135,11 +140,14 @@ def build_classifier(optimizer):
   classifier.compile(optimizer = optimizer, loss = "binary_crossentropy", metrics = ["accuracy"])
   return classifier
 
-classifier = KerasClassifier(build_fn = build_classifier)
+#classifier = KerasClassifier(build_fn = build_classifier)
+# Nueva declaración de clasificador
+classifier = KerasClassifier(model = build_classifier());
 
+# Cambio de nb_epch a epochs
 parameters = {
     'batch_size' : [25,32],
-    'nb_epoch' : [100, 500], 
+    'epochs' : [100, 500], 
     'optimizer' : ['adam', 'rmsprop']
 }
 
@@ -150,3 +158,7 @@ grid_search = GridSearchCV(estimator = classifier,
 grid_search = grid_search.fit(X_train, y_train)
 best_parameters = grid_search.best_params_
 best_accuracy = grid_search.best_score_
+
+## MEJORES VALORES
+# {'batch_size': 25, 'epochs': 500, 'optimizer': 'rmsprop'}
+# 0.8474999999999999
