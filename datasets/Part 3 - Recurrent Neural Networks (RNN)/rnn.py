@@ -2,9 +2,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sat Jan  4 19:32:12 2020
+Created on Apr 2023
 
-@author: juangabriel
+@author: greenskull
 """
 
 # Parte 1 - Preprocesado de los datos
