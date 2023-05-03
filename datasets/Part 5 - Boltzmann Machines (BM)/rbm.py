@@ -1,9 +1,9 @@
 #Máquinas de Boltzmann Restringidas
 # -*- coding: utf-8 -*-
 """
-Created on Fri Jan 10 09:51:46 2020
+Created on May 2023
 
-@author: juangabriel
+@author: greenskull
 """
 
 # Importar las librerías

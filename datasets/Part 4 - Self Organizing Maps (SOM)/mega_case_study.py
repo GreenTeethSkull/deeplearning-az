@@ -2,12 +2,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jan  7 19:37:56 2020
+Created on May 2023
 
-@author: juangabriel
-"""
-
-# Parte 1 - Identificar los fraudes potenciales con un SOM
+@author: greenskull
+"""# Parte 1 - Identificar los fraudes potenciales con un SOM
 
 # Importar las librerías
 import numpy as np
@@ -46,7 +44,9 @@ show()
 
 # Encontrar los fraudes
 mappings = som.win_map(X)
-frauds = np.concatenate( (mappings[(3,1)], mappings[(2,5)]), axis = 0 )
+a1 = mappings[(8,7)]
+a2 = mappings[(7,7)]
+frauds = np.concatenate((a1, a2), axis = 0 )
 frauds = sc.inverse_transform(frauds)
 
 

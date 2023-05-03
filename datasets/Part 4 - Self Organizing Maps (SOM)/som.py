@@ -2,9 +2,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sat Jan  7 13:12:15 2020
+Created on May 2023
 
-@author: juangabriel
+@author: greenskull
 """
 
 # Importar las librerías
@@ -44,5 +44,5 @@ show()
 
 # Encontrar los fraudes
 mappings = som.win_map(X)
-frauds = np.concatenate( (mappings[(6,1)], mappings[(7,8)]), axis = 0 )
+frauds = np.concatenate( (mappings[(1,3)], mappings[(7,1)]), axis = 0 )
 frauds = sc.inverse_transform(frauds)
